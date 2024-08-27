@@ -7,12 +7,20 @@ import gradio as gr
 import rembg
 
 # models = [
-#     "None",
 #     "u2net",
 #     "u2netp",
 #     "u2net_human_seg",
 #     "u2net_cloth_seg",
 #     "silueta",
+#     "isnet-general-use",
+#     "isnet-anime",
+#     "birefnet-general",
+#     "birefnet-general-lite",
+#     "birefnet-portrait",
+#     "birefnet-dis",
+#     "birefnet-hrsod",
+#     "birefnet-cod",
+#     "birefnet-massive",
 # ]
 
 
@@ -34,7 +42,7 @@ def rembg_api(_: gr.Blocks, app: FastAPI):
 
         image = rembg.remove(
             input_image,
-            session=rembg.new_session(model),
+            session=rembg.new_session(model, providers=['CUDAExecutionProvider', 'CPUExecutionProvider']),
             only_mask=return_mask,
             alpha_matting=alpha_matting,
             alpha_matting_foreground_threshold=alpha_matting_foreground_threshold,
